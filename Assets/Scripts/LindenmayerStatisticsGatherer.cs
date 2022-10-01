@@ -9,14 +9,14 @@ public class LindenmayerStatisticsGatherer : MonoBehaviour
     private LSystemBehavior lsystem;
     private TurtleInterpreterBehavior turtle;
 
-    public LineGraph lsystemOrganCounts;
+    public FancyGraph lsystemOrganCounts;
     public LineGraph boundingBoxSurfaceArea;
 
     void Awake()
     {
         lsystem = GetComponent<LSystemBehavior>();
         turtle = GetComponent<TurtleInterpreterBehavior>();
-        
+
         lsystem.OnSystemStateUpdated += OnLsystemStateUpdated;
         turtle.OnTurtleMeshUpdated += OnTurtleMeshUpdated;
     }
@@ -31,7 +31,11 @@ public class LindenmayerStatisticsGatherer : MonoBehaviour
     {
         var symbols = lsystem.steppingHandle.currentState.currentSymbols;
         var symbolCount = symbols.Data.Length;
-        lsystemOrganCounts.AppendData(symbolCount);
+        lsystemOrganCounts.AppendData(new FancyGraph.DataPoint
+        {
+            value = symbolCount,
+            time = lsystemOrganCounts.DataLength()
+        });
     }
     private void OnTurtleMeshUpdated()
     {
