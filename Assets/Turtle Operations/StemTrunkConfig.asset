@@ -18,9 +18,9 @@ MonoBehaviour:
     baseRadius: 0.1
     radiusScaleFactor: 0
     baseLength: 1
-    lengthScaleFactor: 0
-    scaleIsAdditional: 0
-    scalingSource: 2
+    lengthScaleFactor: 1
+    scaleIsAdditional: 1
+    scalingSource: -1
     scalePower: 1
     radialResolution: 5
     material: {fileID: 2100000, guid: c97573355588d3d4c9a5523a3c5c896b, type: 2}

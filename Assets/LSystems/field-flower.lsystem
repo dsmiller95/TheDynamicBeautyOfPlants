@@ -1,8 +1,8 @@
 #axiom P(4)
-#iterations 8
+#iterations 20
 
 
-#symbols /\+-^&`
+#symbols /\+-^&`@!
 
 #symbols L
 #define Leaf L
@@ -17,26 +17,36 @@
 #define StemInit I
 #symbols S
 #define StemRecurse S
-#symbols Y
-#define FlowerBud Y
-#symbols W
-#define LeafyBranch W
 
 
-P(0.25) | GrowthTip(x) : x > 0 -> StemInit GrowthTip(x - 1)
-P(0.25) | GrowthTip(x) : x > 0 -> StemInit [/(180) && GrowthTip(x - 1)] GrowthTip(x - 1)
-P(0.25) | GrowthTip(x) : x > 0 -> StemInit [&& GrowthTip(x - 1)] GrowthTip(x - 1)
-P(0.25) | GrowthTip(x) : x > 0 -> StemInit [&& GrowthTip(x - 1)] [/(180) && GrowthTip(x - 1)] GrowthTip(x - 1)
+P(0.1) | GrowthTip(x) : x > 0 -> StemInit(x) GrowthTip(x - 1)
+P(0.3) | GrowthTip(x) : x > 0 -> StemInit(x) [/(180) && GrowthTip(x - 1)] GrowthTip(x - 1)
+P(0.3) | GrowthTip(x) : x > 0 -> StemInit(x) [&& GrowthTip(x - 1)] GrowthTip(x - 1)
+P(0.3) | GrowthTip(x) : x > 0 -> StemInit(x) [&& GrowthTip(x - 1)] [/(180) && GrowthTip(x - 1)] GrowthTip(x - 1)
 
 GrowthTip(x) : x <= 0 -> FlowerBud
 
 
-StemInit -> Stem StemRecurse LeafyBranch Stem StemRecurse
+StemInit(x) -> Stem StemRecurse(x) LeafyBranch Stem StemRecurse(x)
 
-FlowerBud -> [Stem Stem Stem Flower]
+#symbols Y
+#define FlowerBud Y
+#symbols y
+#define FlowerSegment y
 
-StemRecurse -> StemRecurse(1)
-P(0.5) | StemRecurse(x) -> StemRecurse Stem StemRecurse
-P(0.5) | StemRecurse(x) -> StemRecurse LeafyBranch \(137) Stem StemRecurse
+FlowerBud -> FlowerBud(5)
+FlowerBud(x) : x >  0 -> FlowerBud(x - 1) FlowerSegment FlowerBud(x - 1)
+FlowerBud(x) : x <= 0 -> FlowerSegment
 
-LeafyBranch -> [//&& Leaf][/(180)//&& Leaf]
+FlowerSegment -> \(137) Stem(-0.9) [&& Stem [Stem] Flower] !(0.97)
+
+## StemRecurse(x) : x >  4 -> StemRecurse
+## StemRecurse(x) : x <= 4 -> StemRecurse(x + 1)
+P(0.5) | StemRecurse(x) : x > 0 -> StemRecurse(x - 1) Stem StemRecurse(x - 1)
+P(0.5) | StemRecurse(x) : x > 0 -> StemRecurse(x - 1) LeafyBranch \(137) Stem StemRecurse(x - 1)
+StemRecurse(x) : x <= 0 ->
+
+
+## #symbols W
+#define LeafyBranch [//&& Leaf][/(180)//&& Leaf]
+## LeafyBranch -> [//&& Leaf][/(180)//&& Leaf]
