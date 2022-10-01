@@ -1414,7 +1414,7 @@ MonoBehaviour:
     time: 3.5
   - value: 3.8
     time: 4.2
-  graphTextureWidth: 512
+  graphTextureWidth: 128
   graphMaterial: {fileID: 2100000, guid: 7d4f94ec63ec1484eb601318aef0df82, type: 2}
 --- !u!1 &2138677391
 GameObject:
@@ -1490,7 +1490,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 4.5904e-41, y: 0, z: 0, w: 2.5383932e+17}
+  m_BoundingSphereOverride: {x: 5.5e-44, y: 2.7e-44, z: 5.7e-44, w: 2.8e-44}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0

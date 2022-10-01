@@ -140,7 +140,7 @@ public class FancyGraph : MonoBehaviour
 
         var colorData = graphs.GetPixels(0);
 
-        Debug.Log(colorData.Length);
+        //Debug.Log(colorData.Length);
     }
 
     struct RenderGraphTextureJob : IJobParallelFor
