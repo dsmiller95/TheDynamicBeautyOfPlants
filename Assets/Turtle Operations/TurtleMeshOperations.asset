@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   meshKeys:
   - Character: 76
-    MeshRef: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+    MeshRef: {fileID: -6432097111115202181, guid: 6100d98a0324b5448869c04b89ac8c21, type: 3}
     MeshVariants: []
-    material: {fileID: 2100000, guid: 4e4ee62211982374c8bf1d07883530a5, type: 2}
-    IndividualScale: {x: 1, y: 1, z: 1}
-    UseMeshOrigin: 0
+    material: {fileID: 2100000, guid: be8eced7bcf2ed04d88f770c6f5065bb, type: 2}
+    IndividualScale: {x: 0.5, y: 0.5, z: 0.5}
+    UseMeshOrigin: 1
     ParameterScale: 0
     ScaleIsAdditional: 0
     ScalePower: 0
