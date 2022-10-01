@@ -1,5 +1,5 @@
-#axiom P
-#iterations 4
+#axiom P(4)
+#iterations 8
 
 
 #symbols /\+-^&`
@@ -13,27 +13,30 @@
 
 #symbols P
 #define GrowthTip P
-
 #symbols I
 #define StemInit I
 #symbols S
 #define StemRecurse S
-
 #symbols Y
 #define FlowerBud Y
-
 #symbols W
 #define LeafyBranch W
 
 
-GrowthTip -> StemInit +[GrowthTip + FlowerBud]--//[-- Leaf] StemInit [++Leaf]-[GrowthTip FlowerBud]++GrowthTip
+P(0.25) | GrowthTip(x) : x > 0 -> StemInit GrowthTip(x - 1)
+P(0.25) | GrowthTip(x) : x > 0 -> StemInit [/(180) && GrowthTip(x - 1)] GrowthTip(x - 1)
+P(0.25) | GrowthTip(x) : x > 0 -> StemInit [&& GrowthTip(x - 1)] GrowthTip(x - 1)
+P(0.25) | GrowthTip(x) : x > 0 -> StemInit [&& GrowthTip(x - 1)] [/(180) && GrowthTip(x - 1)] GrowthTip(x - 1)
+
+GrowthTip(x) : x <= 0 -> FlowerBud
+
 
 StemInit -> Stem StemRecurse LeafyBranch Stem StemRecurse
 
 FlowerBud -> [Stem Stem Stem Flower]
 
-P(0.6) | StemRecurse -> StemRecurse
-P(0.2) | StemRecurse -> StemRecurse Stem StemRecurse
-P(0.2) | StemRecurse -> StemRecurse LeafyBranch Stem StemRecurse
+StemRecurse -> StemRecurse(1)
+P(0.5) | StemRecurse(x) -> StemRecurse Stem StemRecurse
+P(0.5) | StemRecurse(x) -> StemRecurse LeafyBranch \(137) Stem StemRecurse
 
-LeafyBranch -> [//&& Leaf][//^^////////// Leaf]
+LeafyBranch -> [//&& Leaf][/(180)//&& Leaf]
