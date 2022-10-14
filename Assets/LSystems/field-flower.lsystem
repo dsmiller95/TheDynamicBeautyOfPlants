@@ -1,8 +1,8 @@
 #axiom P(4)
-#iterations 20
+#iterations 80
 
 
-#symbols /\+-^&`@!
+#symbols /\+-^&`@!*$
 
 #symbols L
 #define Leaf L
@@ -24,29 +24,46 @@ P(0.3) | GrowthTip(x) : x > 0 -> StemInit(x) [/(180) && GrowthTip(x - 1)] Growth
 P(0.3) | GrowthTip(x) : x > 0 -> StemInit(x) [&& GrowthTip(x - 1)] GrowthTip(x - 1)
 P(0.3) | GrowthTip(x) : x > 0 -> StemInit(x) [&& GrowthTip(x - 1)] [/(180) && GrowthTip(x - 1)] GrowthTip(x - 1)
 
-GrowthTip(x) : x <= 0 -> FlowerBud
+GrowthTip(x) : x <= 0 -> s(8) FlowerBud
+
+#symbols s
+#define BendUpStem s
+s(x) : x > 0 -> s(x - 1) Stem $
+s(x) : x <= 0 -> 
 
 
-StemInit(x) -> Stem StemRecurse(x) LeafyBranch Stem StemRecurse(x)
+StemInit(x) -> Stem StemRecurse(x) LeafyBranch(x) Stem StemRecurse(x)
 
 #symbols Y
 #define FlowerBud Y
 #symbols y
 #define FlowerSegment y
 
-FlowerBud -> FlowerBud(5)
-FlowerBud(x) : x >  0 -> FlowerBud(x - 1) FlowerSegment FlowerBud(x - 1)
+FlowerBud -> FlowerBud(2^5)
+FlowerBud(x) : x >  0 -> FlowerSegment FlowerBud(x - 1)
 FlowerBud(x) : x <= 0 -> FlowerSegment
 
-FlowerSegment -> \(137) Stem(-0.9) [&& Stem [Stem] Flower] !(0.97)
+FlowerSegment -> \(137) Stem(-0.9) [&&& [Stem] LittleFlower(0, 1)]
+## !(0.99)
+
+#symbols k
+#define LittleFlower k
+#define LittelFlowerMaxStates 3
+
+LittleFlower(variant, scale) : variant < LittelFlowerMaxStates -> LittleFlower(variant + 0.1, scale)
 
 ## StemRecurse(x) : x >  4 -> StemRecurse
 ## StemRecurse(x) : x <= 4 -> StemRecurse(x + 1)
 P(0.5) | StemRecurse(x) : x > 0 -> StemRecurse(x - 1) Stem StemRecurse(x - 1)
-P(0.5) | StemRecurse(x) : x > 0 -> StemRecurse(x - 1) LeafyBranch \(137) Stem StemRecurse(x - 1)
+P(0.5) | StemRecurse(x) : x > 0 -> StemRecurse(x - 1) LeafyBranch(x) \(137) Stem StemRecurse(x - 1)
 StemRecurse(x) : x <= 0 ->
 
 
-## #symbols W
-#define LeafyBranch [//&& Leaf][/(180)//&& Leaf]
-## LeafyBranch -> [//&& Leaf][/(180)//&& Leaf]
+#define LeafGrowthStep 0.1
+#define MaxLeafGrowth 2
+#symbols W
+#define LeafyBranch W
+## #define LeafyBranch [//&& Leaf(LeafGrowthStep)][/(180)//&& Leaf(LeafGrowthStep)]
+LeafyBranch(x) -> [//&& Leaf(LeafGrowthStep, x)][/(180)//&& Leaf(LeafGrowthStep, x)]
+
+Leaf(growth, max) : growth < max -> Leaf(growth + LeafGrowthStep, max)
