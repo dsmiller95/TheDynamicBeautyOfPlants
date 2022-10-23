@@ -15,7 +15,7 @@ MonoBehaviour:
   stemKeys:
   - Character: 70
     AlsoMove: 1
-    baseRadius: 0.1
+    baseRadius: 0.2
     radiusScaleFactor: 0
     baseLength: 1
     lengthScaleFactor: 1
