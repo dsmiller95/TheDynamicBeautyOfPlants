@@ -15,43 +15,17 @@
 
 #define BranchDownScale 0.95
 
-## P(0.40) | GrowthTip -> \(137) StemInit GrowthTip
-## P(0.25) | GrowthTip -> \(137) StemInit !(BranchDownScale) [/(180) &(45) GrowthTip] GrowthTip
-## P(0.25) | GrowthTip -> \(137) StemInit !(BranchDownScale) [&(45) GrowthTip] GrowthTip
-P(1) | GrowthTip -> \(137) $(0.01) StemInit StemInit !(BranchDownScale^2) @(BranchDownScale^2) [&(180-137) GrowthTip] [/(180) &(180-137) GrowthTip]
+GrowthTip -> \(137) $(0.01) StemInit StemInit !(BranchDownScale^2) @(BranchDownScale^2) [&(180-137) GrowthTip] [/(180) &(180-137) GrowthTip]
 
 
 #symbols W
 #define LeafyBranch W
 StemInit -> Stem LeafyBranch Stem
 
+P(0.5) | LeafyBranch -> [&& Leaf][/(180)&& Leaf]
+P(0.5) | LeafyBranch -> [/(90)&& Leaf][/(-90)&& Leaf]
 
-LeafyBranch -> [//&& Leaf][/(180)//&& Leaf]
-
-
-#symbols s
-#define BendUpStem s
-BendUpStem(x) : x > 0 -> BendUpStem(x - 1) Stem $
-BendUpStem(x) : x <= 0 -> 
-
-#symbols Y
-#define FlowerBud Y
-#symbols y
-#define FlowerSegment y
 #symbols K
 #define BigFlower K
-
 #symbols k
 #define LittleFlower k
-#define LittelFlowerMaxStates 3
-
-FlowerBud -> FlowerBud(2^5)
-FlowerBud(x) : x >  0 -> FlowerSegment FlowerBud(x - 1)
-FlowerBud(x) : x <= 0 -> FlowerSegment
-
-FlowerSegment -> \(137) Stem(-0.9) [&&& [Stem] LittleFlower(0, 1)]
-## !(0.99)
-
-
-LittleFlower(variant, scale) : variant < LittelFlowerMaxStates -> LittleFlower(variant + 0.1, scale)
-

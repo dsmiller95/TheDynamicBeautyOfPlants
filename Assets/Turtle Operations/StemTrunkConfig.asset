@@ -16,12 +16,12 @@ MonoBehaviour:
   - Character: 70
     AlsoMove: 1
     baseRadius: 0.2
-    radiusScaleFactor: 0
+    radiusScaleFactor: 1
     baseLength: 1
     lengthScaleFactor: 1
-    scaleIsAdditional: 1
+    scaleIsAdditional: 0
     scalingSource: -1
-    scalePower: 1
+    scalePower: 2
     radialResolution: 5
     material: {fileID: 2100000, guid: c97573355588d3d4c9a5523a3c5c896b, type: 2}
     constrainUVs: 0

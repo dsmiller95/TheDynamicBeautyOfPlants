@@ -1,0 +1,47 @@
+#axiom FP
+#iterations 66
+
+#symbols /\+-^&`@!*$
+
+#symbols L
+#define Leaf L
+
+#symbols F
+#matches F
+#define Stem F
+
+#symbols P
+#define GrowthTip P
+#symbols I
+#define StemInit I
+
+#define BranchDownScale 0.95
+
+#define BranchSegmentStructure \(137) $(0.01) StemInit StemInit !(BranchDownScale^2) @(BranchDownScale^2) [&(180-137) GrowthTip] [/(180) &(180-137) GrowthTip]
+Stem(x) < GrowthTip : x > 0 -> BranchSegmentStructure
+Stem    < GrowthTip         -> BranchSegmentStructure
+
+
+
+#symbols W
+#define LeafyBranch W
+StemInit -> Stem(0) LeafyBranch Stem(0)
+
+
+P(0.5) | LeafyBranch -> [&& Leaf(0)][/(180)&& Leaf(0)]
+P(0.5) | LeafyBranch -> [/(90)&& Leaf(0)][/(-90)&& Leaf(0)]
+
+#define growthSpeed (1/15)
+
+Stem(a) < Leaf(x) : a > 0 && x <  (1 - growthSpeed) -> Leaf(x + growthSpeed)
+Stem < Leaf(x) : x >= (1 - growthSpeed) -> Leaf
+
+Stem(a) < Stem(x) : a > 0 && x <  (1 - growthSpeed) -> Stem(x + growthSpeed)
+Stem < Stem(x) : x <  (1 - growthSpeed) -> Stem(x + growthSpeed)
+Stem < Stem(x) : x >= (1 - growthSpeed) -> Stem
+
+
+#symbols K
+#define BigFlower K
+#symbols k
+#define LittleFlower k
