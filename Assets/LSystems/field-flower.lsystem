@@ -24,7 +24,7 @@ P(0.3) | GrowthTip(x) : x > 0 -> StemInit(x) [/(180) && GrowthTip(x - 1)] Growth
 P(0.3) | GrowthTip(x) : x > 0 -> StemInit(x) [&& GrowthTip(x - 1)] GrowthTip(x - 1)
 P(0.3) | GrowthTip(x) : x > 0 -> StemInit(x) [&& GrowthTip(x - 1)] [/(180) && GrowthTip(x - 1)] GrowthTip(x - 1)
 
-GrowthTip(x) : x <= 0 -> s(8) FlowerBud
+GrowthTip(x) : x <= 0 -> s(3) FlowerBud
 
 #symbols s
 #define BendUpStem s
@@ -43,7 +43,7 @@ FlowerBud -> FlowerBud(2^5)
 FlowerBud(x) : x >  0 -> FlowerSegment FlowerBud(x - 1)
 FlowerBud(x) : x <= 0 -> FlowerSegment
 
-FlowerSegment -> \(137) Stem(-0.9) [&&& [Stem] LittleFlower(0, 1)]
+FlowerSegment -> \(137) Stem(0.1) $ [&&& [Stem] LittleFlower(0, 1)]
 ## !(0.99)
 
 #symbols k

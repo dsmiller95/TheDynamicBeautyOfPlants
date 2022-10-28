@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   secondsPerUpdate: 0.5
   timeBeforeRestart: 10
-  systemObject: {fileID: 378491273550888993, guid: 1b616e7b92367a640aabcb23e41e91c9, type: 3}
+  systemObject: {fileID: 378491273550888993, guid: 76c4687f4faec6e44ba5a72319b46a2f, type: 3}
 --- !u!1 &1306009601841341849
 GameObject:
   m_ObjectHideFlags: 0
@@ -217,7 +217,7 @@ GameObject:
   - component: {fileID: 9015624603646628366}
   - component: {fileID: 4209380145033852860}
   m_Layer: 0
-  m_Name: 1 Hedge continuous plant example
+  m_Name: 2 Hedge water restricted plant example
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -231,7 +231,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9015624603646628360}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 20, y: 0, z: 0}
+  m_LocalPosition: {x: 40, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8446443121584322806}
@@ -368,4 +368,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 349eddcaf03d50b449203e62c6366562, type: 2}
   - {fileID: 11400000, guid: 7e700861e836de54ead0f7a3ea2f6fa5, type: 2}
   - {fileID: 11400000, guid: 2b0c8eba2400bee43b2e64634f568c43, type: 2}
+  - {fileID: 11400000, guid: 9d0ec6bda31b74d49acc111deabe7e62, type: 2}
   initialScale: {x: 0.1, y: 0.1, z: 0.1}
