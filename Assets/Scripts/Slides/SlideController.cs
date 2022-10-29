@@ -1,3 +1,4 @@
+using Assets.Scripts.ReactiveInputExtensions;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Dman.Utilities;
@@ -7,6 +8,8 @@ using System.Security.AccessControl;
 using System.Threading;
 using UniRx;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using static System.TimeZoneInfo;
 
 public class SlideController : MonoBehaviour
 {
@@ -16,10 +19,16 @@ public class SlideController : MonoBehaviour
     public Material surfaceMaterial;
     public RenderTexture renderTextureTemplate;
 
-    public float autoAdvanceTimer = 10f;
+    public float transitionTime = 2f;
 
 
     public int currentSlideIndex = 0;
+
+    public InputActionReference nextSlide;
+    public InputActionReference previousSlide;
+
+    private BehaviorSubject<int> slideIndex;
+
     private SlidePrefab currentSlide = null;
 
     private GameObject slideDisplayer = null;
@@ -27,12 +36,42 @@ public class SlideController : MonoBehaviour
 
     private CancellationTokenSource nextSlideAdvancement;
 
-
-    public void AdvanceSlide()
+    private void Awake()
     {
-        currentSlideIndex = (currentSlideIndex + 1) % slides.Length;
-        var newSlide = Instantiate(slides[currentSlideIndex]);
-        SwitchToSlide(newSlide, 5f, TaskUtil.RefreshToken(ref nextSlideAdvancement)).Forget();
+        var pendingSlide = UniTask.FromCanceled();
+
+        slideIndex = new BehaviorSubject<int>(0);
+
+        nextSlide.ObservePerformed()
+            .Do(x => Debug.Log("next slide event"))
+            .Select(x => 1)
+            .Subscribe(x => AdvanceSlide(x))
+            .AddTo(this);
+        previousSlide.ObservePerformed()
+            .Do(x => Debug.Log("previous slide event"))
+            .Select(x => -1)
+            .Subscribe(x => AdvanceSlide(x))
+            .AddTo(this);
+
+        slideIndex
+            .Pairwise()
+            .Subscribe(slideIndexPair =>
+            {
+                var diff = slideIndexPair.Current - slideIndexPair.Previous;
+                if (diff == 0 && currentSlide != null) return;
+                pendingSlide = SwitchToSlide(
+                    slideIndexPair.Current,
+                    transitionTime,
+                    diff > 0,
+                    TaskUtil.RefreshToken(ref nextSlideAdvancement));
+            }).AddTo(this);
+        slideIndex.AddTo(this);
+    }
+
+
+    public void AdvanceSlide(int slidesForward)
+    {
+        slideIndex.OnNext((slideIndex.Value + slidesForward + slides.Length) % slides.Length);
     }
 
     private void OnDestroy()
@@ -52,8 +91,15 @@ public class SlideController : MonoBehaviour
         }
     }
 
-    private async UniTask SwitchToSlide(SlidePrefab nextSlide, float transitionTime, CancellationToken cancel)
+    private async UniTask SwitchToSlide(
+        int slideIndex, 
+        float transitionTime,
+        bool forward,
+        CancellationToken cancel)
     {
+        await UniTask.NextFrame(cancel);
+        var nextSlide = Instantiate(slides[slideIndex]);
+
         var renderCubeCenter = new GameObject("quad center");
         renderCubeCenter.transform.SetParent(renderCamera.transform, false);
         renderCubeCenter.transform.position = new Vector3(0, 0, 1);
@@ -92,66 +138,59 @@ public class SlideController : MonoBehaviour
 
         var enterRotation = Quaternion.Euler(new Vector3(0, 90, 0));
         var exitRotation = Quaternion.Euler(new Vector3(0, 270, 0));
+        if (!forward)
+        {
+            (enterRotation, exitRotation) = (exitRotation, enterRotation);
+        }
         renderCubeCenter.transform.localRotation = enterRotation;
-        var tweens = new List<Tween>();
+        //var tweens = new List<Tween>();
         //DOTween.To<Vector3>(vec => { renderCubeCenter.transform.eulerAngles = vec}, enterRotation, Vector3.zero, transitionTime);
         
-        tweens.Add(renderCubeCenter.transform.DOLocalRotateQuaternion(Quaternion.identity, transitionTime));
+        var newInTween = renderCubeCenter.transform.DOLocalRotateQuaternion(Quaternion.identity, transitionTime);
+        Tween oldOutTween = null;
         
         if (currentSlide != null)
         {
-            tweens.Add(slideDisplayer.transform.DOLocalRotateQuaternion(exitRotation, transitionTime));
+            oldOutTween = slideDisplayer.transform.DOLocalRotateQuaternion(exitRotation, transitionTime);
         }
 
         try
         {
-            await UniTask.WhenAll(tweens.Select(x => x.ToUniTask(cancellationToken: cancel)));
+            await UniTask.WhenAll(
+                newInTween.ToUniTask(TweenCancelBehaviour.CompleteAndCancelAwait, cancellationToken: cancel),
+                oldOutTween?.ToUniTask(TweenCancelBehaviour.CompleteAndCancelAwait, cancellationToken: cancel) ?? UniTask.FromResult(0));
         }
         catch
         {
-            newRenderTexture.Release();
-            Destroy(newRenderTexture);
-            Destroy(renderCubeCenter);
-            throw;
+            // oldOutTween.Restart();
+
+            // nextSlide.slideRenderer.targetTexture = null;
+            // Destroy(renderCubeCenter);
+            // Destroy(nextSlide.gameObject);
+            // newRenderTexture.Release();
+            // Destroy(newRenderTexture);
+            // throw;
         }
         finally
         {
-            foreach (var tween in tweens)
+            newInTween.Kill();
+            oldOutTween?.Kill();
+
+            if (activeRenderTex != null)
             {
-                tween.Complete();
-                tween.Kill();
+                activeRenderTex.Release();
+                Destroy(activeRenderTex);
             }
-        }
+            activeRenderTex = newRenderTexture;
+            if (currentSlide != null)
+            {
+                Destroy(currentSlide.gameObject);
+                Destroy(slideDisplayer);
+            }
+            currentSlide = nextSlide;
+            slideDisplayer = renderCubeCenter;
 
-        if(activeRenderTex != null)
-        {
-            activeRenderTex.Release();
-            Destroy(activeRenderTex);
-        }
-        activeRenderTex = newRenderTexture;
-        if(currentSlide != null)
-        {
-            Destroy(currentSlide.gameObject);
-            Destroy(slideDisplayer);
-        }
-        currentSlide = nextSlide;
-        slideDisplayer = renderCubeCenter;
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    float lastSwap = 0;
-    // Update is called once per frame
-    void Update()
-    {
-        if(lastSwap + autoAdvanceTimer < Time.unscaledTime)
-        {
-            lastSwap = Time.unscaledTime;
-            AdvanceSlide();
+            currentSlideIndex = slideIndex;
         }
     }
 }
