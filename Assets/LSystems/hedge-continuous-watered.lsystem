@@ -65,7 +65,7 @@ P(0.5) | DiffusionNodeMatcher < Leaf(x) : water >= minWaterToGrow && (water/wate
 
 P(0.5) | DiffusionNodeMatcher < Stem(x) : water >= minWaterToGrow && (water/waterDiv + x) <  1 -> Stem(x)
 P(0.5) | DiffusionNodeMatcher < Stem(x) : water >= minWaterToGrow && (water/waterDiv + x) <  1 -> DiffusionAmount(-water/waterDiv) Stem(x + water/waterDiv)
-         DiffusionNodeMatcher < Stem(x) : water >= minWaterToGrow && (water/waterDiv + x) <= 1 -> DiffusionAmount(-water/waterDiv) Stem
+         DiffusionNodeMatcher < Stem(x) : water >= minWaterToGrow && (water/waterDiv + x) >= 1 -> DiffusionAmount(-water/waterDiv) Stem
 
 
 
