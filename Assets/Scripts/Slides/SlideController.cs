@@ -122,12 +122,10 @@ public class SlideController : MonoBehaviour
 
 
         var newRenderTexture = new RenderTexture(renderTextureTemplate);
-        newRenderTexture.width = nextSlide.slideRenderer.pixelWidth;
-        newRenderTexture.height = nextSlide.slideRenderer.pixelHeight;
+        newRenderTexture.width = renderCamera.pixelWidth;
+        newRenderTexture.height = renderCamera.pixelHeight;
         newRenderTexture.Create();
-
-        nextSlide.slideRenderer.targetTexture = newRenderTexture;
-        nextSlide.slideRenderer.forceIntoRenderTexture = true;
+        nextSlide.SetRenderTarget(newRenderTexture);
 
         {
             var renderer = nextQuad.GetComponent<MeshRenderer>();

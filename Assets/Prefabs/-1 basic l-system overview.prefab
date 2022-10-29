@@ -420,7 +420,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 573d230aa76c8a047b70a2655db75549, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slideRenderer: {fileID: 870083045888581136}
+  renderCameras:
+  - {fileID: 870083045888581136}
 --- !u!1001 &5859279756957488262
 PrefabInstance:
   m_ObjectHideFlags: 0
