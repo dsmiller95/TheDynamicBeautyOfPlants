@@ -174,12 +174,6 @@ public class SlideController : MonoBehaviour
             newInTween.Kill();
             oldOutTween?.Kill();
 
-            if (activeRenderTex != null)
-            {
-                activeRenderTex.Release();
-                Destroy(activeRenderTex);
-            }
-            activeRenderTex = newRenderTexture;
             if (currentSlide != null)
             {
                 Destroy(currentSlide.gameObject);
@@ -187,6 +181,13 @@ public class SlideController : MonoBehaviour
             }
             currentSlide = nextSlide;
             slideDisplayer = renderCubeCenter;
+
+            if (activeRenderTex != null)
+            {
+                activeRenderTex.Release();
+                Destroy(activeRenderTex);
+            }
+            activeRenderTex = newRenderTexture;
 
             currentSlideIndex = slideIndex;
         }

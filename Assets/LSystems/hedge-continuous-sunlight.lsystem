@@ -1,0 +1,90 @@
+#axiom Fn(0.2, 0, 100, 10, 100)r(5)P
+#iterations 2000
+
+#symbols /\+-^&`@!*$
+
+#symbols na
+#matches n
+#include diffusion (Node->n) (Amount->a)
+#define diffusionStepsPerStep 5
+
+#define DiffusionNode n
+#define DiffusionAmount a
+
+#define DiffusionNodeMatcher DiffusionNode(ratio, water, maxWLocal, glucose, maxGLocal)
+#define DefaultDiffusionNode DiffusionNode(0.2, 0, 100, 0, 100)
+
+#define minResource 0.1
+#define resourceDiv 5
+
+
+#symbols i
+#define OrganIdent i
+#matches i
+#include organIdentity (Identifier->i)
+#symbols s
+#define Sun s
+#matches s
+#include sunlight (LightAmount->s)
+
+
+#symbols r
+#define Root r
+
+Root(x) -> DiffusionAmount(x, 0) Root(x)
+
+#symbols L
+#define Leaf L
+
+#symbols F
+#define Stem F
+
+#symbols R
+#define ResourceVisualizer R
+
+#symbols P
+#define GrowthTip P
+#symbols I
+#define StemInit I
+
+#define BranchDownScale 0.95
+
+
+#define BranchSegmentStructure \(137) $(0.01) OrganIdent(0,0,0) DefaultDiffusionNode ResourceVisualizer(0) StemInit StemInit !(BranchDownScale^2) @(BranchDownScale^2) [&(180-137) GrowthTip] [/(180) &(180-137) GrowthTip]
+DiffusionNodeMatcher < GrowthTip : glucose >= minResource -> BranchSegmentStructure
+
+DiffusionNodeMatcher < ResourceVisualizer(x) -> ResourceVisualizer(glucose)
+
+
+#symbols W
+#define LeafyBranch W
+StemInit -> Stem(0) [LeafyBranch] Stem(0)
+
+
+P(0.5) | LeafyBranch -> LeafSunlightPackage [&& Leaf(0)][/(180)&& Leaf(0)]
+P(0.5) | LeafyBranch -> LeafSunlightPackage [/(90)&& Leaf(0)][/(-90)&& Leaf(0)]
+
+#define growthSpeed (1/15)
+
+## randomly decide not to grow sometimes
+P(0.5) | DiffusionNodeMatcher OrganIdent(a,b,c) Sun(sunlight) < Leaf(x) : glucose >= minResource && (glucose/resourceDiv + x) <  1 -> Leaf(x)
+P(0.5) | DiffusionNodeMatcher OrganIdent(a,b,c) Sun(sunlight) < Leaf(x) : glucose >= minResource && (glucose/resourceDiv + x) <  1 -> DiffusionAmount(0, -glucose/resourceDiv) Leaf(x + glucose/resourceDiv)
+         DiffusionNodeMatcher OrganIdent(a,b,c) Sun(sunlight) < Leaf(x) : glucose >= minResource && (glucose/resourceDiv + x) >= 1 -> DiffusionAmount(0, -glucose/resourceDiv) Leaf
+
+
+P(0.5) | DiffusionNodeMatcher                                 < Stem(x) : glucose >= minResource && (glucose/resourceDiv + x) <  1 -> Stem(x)
+P(0.5) | DiffusionNodeMatcher                                 < Stem(x) : glucose >= minResource && (glucose/resourceDiv + x) <  1 -> DiffusionAmount(0, -glucose/resourceDiv) Stem(x + glucose/resourceDiv)
+         DiffusionNodeMatcher                                 < Stem(x) : glucose >= minResource && (glucose/resourceDiv + x) >= 1 -> DiffusionAmount(0, -glucose/resourceDiv) Stem
+
+
+#symbols l
+#define LeafSunlightProcessor l
+#define LeafSunlightPackage OrganIdent(0,0,0) Sun(0) LeafSunlightProcessor
+#define sunlightAmount (sunlight)
+DiffusionNodeMatcher OrganIdent(a,b,c) Sun(sunlight) < LeafSunlightProcessor : water/resourceDiv >= sunlightAmount -> DiffusionAmount(-sunlightAmount, sunlightAmount) LeafSunlightProcessor
+
+
+#symbols K
+#define BigFlower K
+#symbols k
+#define LittleFlower k
