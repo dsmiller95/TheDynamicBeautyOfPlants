@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78755203f1cf4e742b0faa6bb03bf6f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  secondsPerUpdate: 0.5
+  secondsPerUpdate: 0.1
   timeBeforeRestart: 10
   systemObject: {fileID: 378491273550888993, guid: a456a4e744d90ae4d92e5dc19fba1565, type: 3}
 --- !u!1 &1154431790790630403
@@ -899,7 +899,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   operationSets:
-  - {fileID: 11400000, guid: a715f78da51b8cc4ca5b1f50a86fdb00, type: 2}
+  - {fileID: 11400000, guid: 7e334c5ada9e13d4996730a2168c9050, type: 2}
   - {fileID: 11400000, guid: 1bcafa8c0e3a8c34fa2f9e0f70cfdfc2, type: 2}
   - {fileID: 11400000, guid: d9d47374fb6a73e4a98bd33feb5837b3, type: 2}
   - {fileID: 11400000, guid: 349eddcaf03d50b449203e62c6366562, type: 2}

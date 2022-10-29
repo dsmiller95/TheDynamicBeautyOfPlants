@@ -50,7 +50,7 @@ Root(x) -> DiffusionAmount(x, 0) Root(x)
 #define BranchDownScale 0.95
 
 
-#define BranchSegmentStructure \(137) $(0.01) OrganIdent(0,0,0) DefaultDiffusionNode ResourceVisualizer(0) StemInit StemInit !(BranchDownScale^2) @(BranchDownScale^2) [&(180-137) GrowthTip] [/(180) &(180-137) GrowthTip]
+#define BranchSegmentStructure \(137) $(0.01) OrganIdent(0,0,0) DefaultDiffusionNode ResourceVisualizer(0) StemInit !(BranchDownScale^2) @(BranchDownScale^2) [&(180-137) GrowthTip] [/(180) &(180-137) GrowthTip]
 P(0.25) | DiffusionNodeMatcher < GrowthTip : glucose >= minResource -> BranchSegmentStructure
 P(0.75) | DiffusionNodeMatcher < GrowthTip : glucose >= minResource -> GrowthTip
 
@@ -60,11 +60,11 @@ DiffusionNodeMatcher < ResourceVisualizer(x) : glucose <= 0.00001 -> ResourceVis
 
 #symbols W
 #define LeafyBranch W
-StemInit -> Stem(0) [LeafyBranch] Stem(0)
+StemInit -> Stem(0) [LeafyBranch]
 
 
-P(0.5) | LeafyBranch -> LeafSunlightPackage [&& Leaf(0)][/(180)&& Leaf(0)]
-P(0.5) | LeafyBranch -> LeafSunlightPackage [/(90)&& Leaf(0)][/(-90)&& Leaf(0)]
+P(0.5) | LeafyBranch -> LeafSunlightPackage [&&& Leaf(0)][/(180)&&& Leaf(0)]
+P(0.5) | LeafyBranch -> LeafSunlightPackage [/(90)&&& Leaf(0)][/(-90)&&& Leaf(0)]
 
 #define growthSpeed (1/15)
 
