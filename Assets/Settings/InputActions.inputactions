@@ -60,6 +60,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Slide alternate Axis 1",
+                    "type": "Value",
+                    "id": "781080f1-4cd5-48b6-aa8e-3d1511692385",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
                     "name": "ZoomIn",
                     "type": "Value",
                     "id": "b0ab8174-1aa1-4c0b-a468-66e9a8789d53",
@@ -375,6 +384,61 @@
                     "action": "Slide alternate option 2",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "1D Axis",
+                    "id": "9d0f5047-5e15-44b3-95c1-6f97f601f9f7",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Slide alternate Axis 1",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "6f7e5f35-0914-4711-8e00-beb62eaa98f1",
+                    "path": "<Gamepad>/dpad/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Slide alternate Axis 1",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "db62d73e-70ce-4a8a-be73-ee4dee7ea27e",
+                    "path": "<Gamepad>/dpad/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Slide alternate Axis 1",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "negative",
+                    "id": "bc1f0a48-990a-4cad-9581-c2f6750a0ce7",
+                    "path": "<Keyboard>/z",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Slide alternate Axis 1",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "7a78a6ac-4e9b-4c2e-82f3-fbfe6dc603b0",
+                    "path": "<Keyboard>/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Slide alternate Axis 1",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 }
             ]
         },

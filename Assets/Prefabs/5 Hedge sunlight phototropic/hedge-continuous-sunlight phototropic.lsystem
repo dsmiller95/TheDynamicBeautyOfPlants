@@ -1,0 +1,111 @@
+#axiom Fn(0.2, 0, 100, 10, 100)r(5)P
+#iterations 2000
+
+#symbols /\+-^&`@!*$
+
+#symbols na
+#matches n
+#include diffusion (Node->n) (Amount->a)
+#define diffusionStepsPerStep 5
+
+#define DiffusionNode n
+#define DiffusionAmount a
+
+#define DiffusionNodeMatcher DiffusionNode(ratio, water, maxWLocal, glucose, maxGLocal)
+#define DefaultDiffusionNode DiffusionNode(0.2, 0, 100, 0, 100)
+
+#define minResource 0.1
+#define resourceDiv 7
+
+
+#symbols i
+#define OrganIdent i
+#matches i
+#include organIdentity (Identifier->i)
+#symbols s
+#define Sun s
+#matches s
+#include sunlight (LightAmount->s)
+
+#symbols N
+#define Necrose N
+#include autophagy (Necrose->N)
+
+#symbols o
+#define SunlightOptimizer o
+#include ./leaf-sunlight-optimizer.lsyslib (LeafSunlightOptimizer->o) (LeafKinkDirection->^)
+
+
+#symbols r
+#define Root r
+
+Root(x) -> DiffusionAmount(x, 0) Root(x)
+
+#symbols L
+#matches L
+#define Leaf L
+
+#symbols F
+#define Stem F
+
+#symbols R
+#define ResourceVisualizer R
+
+#symbols P
+#define GrowthTip P
+#symbols I
+#define StemInit I
+
+#define BranchDownScale 0.95
+
+#define BranchSegmentStructure \(137) $(0.00001) OrganIdent(0,0,0) DefaultDiffusionNode ResourceVisualizer(0) StemInit !(BranchDownScale^2) @(BranchDownScale^2) [&(180-137) GrowthTip] [/(180) &(180-137) GrowthTip]
+P(0.25) | DiffusionNodeMatcher < GrowthTip : glucose >= minResource -> BranchSegmentStructure
+P(0.75) | DiffusionNodeMatcher < GrowthTip : glucose >= minResource -> GrowthTip
+
+DiffusionNodeMatcher < ResourceVisualizer(x) : glucose >  0.00001 -> ResourceVisualizer(glucose)
+DiffusionNodeMatcher < ResourceVisualizer(x) : glucose <= 0.00001 -> ResourceVisualizer(0.00001)
+
+
+#symbols W
+#define LeafyBranch W
+StemInit -> Stem(0) LeafyBranch
+
+
+P(0.5) | LeafyBranch ->       SunlightOptimizer(20) [&&& LeafSunlightPackage Leaf(0)][/(180)&&& LeafSunlightPackage Leaf(0)]
+P(0.5) | LeafyBranch -> /(90) SunlightOptimizer(20) [&&& LeafSunlightPackage Leaf(0)][/(180)&&& LeafSunlightPackage Leaf(0)] /(-90)
+
+#define growthSpeed (1/15)
+
+## randomly decide not to grow sometimes
+P(0.5) | DiffusionNodeMatcher OrganIdent(a,b,c) Sun(sunlight) < Leaf(x) : glucose >= minResource && (glucose/resourceDiv + x) <  1 -> Leaf(x)
+P(0.5) | DiffusionNodeMatcher OrganIdent(a,b,c) Sun(sunlight) < Leaf(x) : glucose >= minResource && (glucose/resourceDiv + x) <  1 -> DiffusionAmount(0, -glucose/resourceDiv) Leaf(x + glucose/resourceDiv)
+         DiffusionNodeMatcher OrganIdent(a,b,c) Sun(sunlight) < Leaf(x) : glucose >= minResource && (glucose/resourceDiv + x) >= 1 -> DiffusionAmount(0, -glucose/resourceDiv) Leaf
+
+
+P(0.5) | DiffusionNodeMatcher                                 < Stem(x) : glucose >= minResource && (glucose/resourceDiv + x) <  1 -> Stem(x)
+P(0.5) | DiffusionNodeMatcher                                 < Stem(x) : glucose >= minResource && (glucose/resourceDiv + x) <  1 -> DiffusionAmount(0, -glucose/resourceDiv) Stem(x + glucose/resourceDiv)
+         DiffusionNodeMatcher                                 < Stem(x) : glucose >= minResource && (glucose/resourceDiv + x) >= 1 -> DiffusionAmount(0, -glucose/resourceDiv) Stem
+
+
+#symbols l
+#define LeafSunlightProcessor l
+#symbols O
+#define LeafAutophagySwitch O
+#define LeafSunlightPackage OrganIdent(0,0,0) Sun(0) LeafSunlightProcessor LeafAutophagySwitch(1)
+#define sunlightAmount (sunlight)
+DiffusionNodeMatcher OrganIdent(a,b,c) Sun(sunlight) < LeafSunlightProcessor : water/resourceDiv >= sunlightAmount -> DiffusionAmount(-sunlightAmount, sunlightAmount) LeafSunlightProcessor
+
+
+
+## the LeafAutophagySwitch counts up how many consecutive updates have been below minimum sunlight, and triggers die-off if it reaches a certain limit. only triggers once at least once leaf is fully grown.
+#define minimumSunlight 0.05
+#define stepsTillDie 20
+Sun(sunlight) < LeafAutophagySwitch(x) > L : sunlight <  minimumSunlight && x >  0 -> LeafAutophagySwitch(x - (1/stepsTillDie))
+Sun(sunlight) < LeafAutophagySwitch(x) > L : sunlight <  minimumSunlight && x <= 0 -> Necrose
+Sun(sunlight) < LeafAutophagySwitch(x) > L : sunlight >= minimumSunlight && x <  1 -> LeafAutophagySwitch(x + (1/stepsTillDie))
+
+
+#symbols K
+#define BigFlower K
+#symbols k
+#define LittleFlower k
