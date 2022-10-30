@@ -94,7 +94,7 @@ DiffusionNodeMatcher OrganIdent(a,b,c) Sun(sunlight) < LeafSunlightProcessor : w
 
 
 ## the LeafAutophagySwitch counts up how many consecutive updates have been below minimum sunlight, and triggers die-off if it reaches a certain limit. only triggers once at least once leaf is fully grown.
-#define minimumSunlight 0.01
+#define minimumSunlight 0.05
 #define stepsTillDie 20
 Sun(sunlight) < LeafAutophagySwitch(x) > L : sunlight <  minimumSunlight && x >  0 -> LeafAutophagySwitch(x - (1/stepsTillDie))
 Sun(sunlight) < LeafAutophagySwitch(x) > L : sunlight <  minimumSunlight && x <= 0 -> Necrose

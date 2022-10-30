@@ -194,7 +194,7 @@
                     "id": "f08a3501-c592-4f3e-856f-16ca5baf7df8",
                     "path": "<Gamepad>/rightStick",
                     "interactions": "",
-                    "processors": "",
+                    "processors": "ScaleVector2(x=2,y=2)",
                     "groups": "Gamepad",
                     "action": "Look",
                     "isComposite": false,

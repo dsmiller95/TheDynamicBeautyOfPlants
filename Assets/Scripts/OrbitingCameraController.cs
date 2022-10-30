@@ -8,7 +8,6 @@ using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(Camera))]
 public class OrbitingCameraController : MonoBehaviour
 {
     public MeshRenderer orbitTarget;
@@ -34,6 +33,7 @@ public class OrbitingCameraController : MonoBehaviour
         private static readonly float epsilon = 1e-5f;
 
         private readonly float maxDistance;
+        private readonly Quaternion defaultOrientation;
 
         public CameraState(
             Transform camera,
@@ -43,12 +43,14 @@ public class OrbitingCameraController : MonoBehaviour
             this.maxDistance = maxDistance;
             this.distance = math.distance(camera.position, subject.position);
             this.subjectPosition = subject.position;
-            this.orientation = Quaternion.identity;
+            this.defaultOrientation = this.orientation = camera.rotation;
         }
 
         private CameraState(CameraState other)
         {
             this.maxDistance = other.maxDistance;
+            this.defaultOrientation = other.defaultOrientation;
+
             this.distance = other.distance;
             this.subjectPosition = other.subjectPosition;
             this.orientation = other.orientation;
@@ -72,7 +74,7 @@ public class OrbitingCameraController : MonoBehaviour
         {
             return new CameraState(this)
             {
-                orientation = Quaternion.identity
+                orientation = defaultOrientation
             };
         }
         public CameraState RotatedAround(float aroundRadians)
