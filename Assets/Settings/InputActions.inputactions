@@ -42,9 +42,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Slide Alternate option",
+                    "name": "Slide Alternate option 1",
                     "type": "Button",
                     "id": "03d30eb6-79e6-4306-90f5-e5314b21f3b8",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Slide alternate option 2",
+                    "type": "Button",
+                    "id": "fa03b399-27f0-486c-a3f6-a0b1e0198484",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -182,11 +191,11 @@
                 },
                 {
                     "name": "",
-                    "id": "c1f7a91b-d0fd-4a62-997e-7fb9b69bf235",
+                    "id": "f08a3501-c592-4f3e-856f-16ca5baf7df8",
                     "path": "<Gamepad>/rightStick",
                     "interactions": "",
-                    "processors": "ScaleVector2(x=2,y=2)",
-                    "groups": ";Gamepad",
+                    "processors": "",
+                    "groups": "Gamepad",
                     "action": "Look",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -253,7 +262,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Slide Alternate option",
+                    "action": "Slide Alternate option 1",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -261,10 +270,10 @@
                     "name": "",
                     "id": "02057e5a-654d-4099-b06b-50ce3dcd87b5",
                     "path": "<Mouse>/middleButton",
-                    "interactions": "",
+                    "interactions": "MultiTap",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "Slide Alternate option",
+                    "action": "Slide Alternate option 1",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -293,7 +302,7 @@
                 {
                     "name": "1D Axis",
                     "id": "b935ff6a-4616-4bd8-b0c6-5038ae7ba262",
-                    "path": "1DAxis",
+                    "path": "1DAxis(minValue=-2,maxValue=2)",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -344,6 +353,28 @@
                     "action": "Roll",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "0826c2a2-be87-400d-9285-4fc55ba8c6a0",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Slide alternate option 2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "967be439-7b28-451e-983f-1e0ed228c821",
+                    "path": "<Mouse>/middleButton",
+                    "interactions": "SlowTap",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Slide alternate option 2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },

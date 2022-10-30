@@ -97,7 +97,7 @@ namespace Assets.Scripts.ReactiveInputExtensions
                             aggregatedPerformed.Clear();
                             continue;
                         }
-                        Debug.Log($"Action phase: {action.phase,20}");
+                        //Debug.Log($"Action phase: {action.phase,20}");
                         if (action.inProgress)
                         {
                             observer.OnNext(action.ReadValue<T>());

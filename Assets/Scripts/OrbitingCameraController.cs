@@ -16,8 +16,11 @@ public class OrbitingCameraController : MonoBehaviour
 
     public float lerpSpeed = 1;
     public float maxDistance = 10;
+
     public InputActionReference zoomAxis;
     public InputActionReference orbit2D;
+    public InputActionReference rollAxis;
+    public InputActionReference resetOrientationButton;
 
     private CameraState currentCamState;
     private CameraState targetCamState;
@@ -65,11 +68,32 @@ public class OrbitingCameraController : MonoBehaviour
                 subjectPosition = subjectBounds.center
             };
         }
-        public CameraState RotatedAround(float rotateY)
+        public CameraState WithIdentityRotation()
         {
             return new CameraState(this)
             {
-                orientation = orientation * Quaternion.Euler(0, rotateY, 0)
+                orientation = Quaternion.identity
+            };
+        }
+        public CameraState RotatedAround(float aroundRadians)
+        {
+            return new CameraState(this)
+            {
+                orientation = math.mul(orientation, quaternion.Euler(0, aroundRadians, 0))
+            };
+        }
+        public CameraState RotatedUp(float raiseRadians)
+        {
+            return new CameraState(this)
+            {
+                orientation = math.mul(orientation, quaternion.Euler(raiseRadians, 0, 0))
+            };
+        }
+        public CameraState Rolled(float rollRadians)
+        {
+            return new CameraState(this)
+            {
+                orientation = math.mul(orientation, quaternion.Euler(0, 0, rollRadians)) // quaternion.AxisAngle(math.forward(orientation), rollRadians))
             };
         }
 
@@ -88,7 +112,7 @@ public class OrbitingCameraController : MonoBehaviour
             var cameraLookVector = math.forward(orientation) * distance;
             var camPos = subjectPosition - cameraLookVector;
             camera.position = camPos;
-            camera.LookAt(subjectPosition, Vector3.up);
+            camera.rotation = orientation;
         }
 
         public bool Equals(CameraState other)
@@ -111,7 +135,18 @@ public class OrbitingCameraController : MonoBehaviour
             .AddTo(this);
 
         orbit2D.ReadInputSticky<Vector2>(PlayerLoopTiming.FixedUpdate, AverageVector)
-            .Subscribe(orbit => targetCamState = targetCamState.RotatedAround(orbit.x))
+            .Subscribe(orbit => targetCamState = targetCamState
+                .RotatedAround(math.radians(orbit.x))
+                .RotatedUp(math.radians(-orbit.y))
+             )
+            .AddTo(this);
+
+        rollAxis.ReadInputSticky<float>(PlayerLoopTiming.FixedUpdate, list => list.Average())
+            .Subscribe(roll => targetCamState = targetCamState.Rolled(math.radians(roll)))
+            .AddTo(this);
+
+        resetOrientationButton.ObservePerformed()
+            .Subscribe(_ => targetCamState = targetCamState .WithIdentityRotation())
             .AddTo(this);
     }
 
