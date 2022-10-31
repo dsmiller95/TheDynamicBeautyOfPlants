@@ -511,6 +511,7 @@ MonoBehaviour:
   - {fileID: 4209380145033852860, guid: f0a61622bacce954b9d3141f8e37c825, type: 3}
   - {fileID: 4209380145033852860, guid: 60cfd55cb01e4aa4a96eba39bcf408ae, type: 3}
   - {fileID: 3604845296825118983, guid: ce3f8c48f0f59ca4c95ad8171d84d8ea, type: 3}
+  - {fileID: 3604845296825118983, guid: 47a237552805bbb439418941bf591317, type: 3}
   renderCamera: {fileID: 1687258584}
   surfaceMaterial: {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   renderTextureTemplate: {fileID: 8400000, guid: af4d8bbb283f6204191a5747bfc64b60, type: 2}
