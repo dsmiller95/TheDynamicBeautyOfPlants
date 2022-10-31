@@ -132,18 +132,18 @@ public class OrbitingCameraController : MonoBehaviour
             transform,
             orbitTarget.transform,
             maxDistance);
-        zoomAxis.ReadInputSticky<float>(PlayerLoopTiming.FixedUpdate, list => list.Average())
+        zoomAxis.ReadInputSticky<float>(PlayerLoopTiming.EarlyUpdate, list => list.Average())
             .Subscribe(zoomDiff => targetCamState = targetCamState.Zoomed(zoomDiff))
             .AddTo(this);
 
-        orbit2D.ReadInputSticky<Vector2>(PlayerLoopTiming.FixedUpdate, AverageVector)
+        orbit2D.ReadInputSticky<Vector2>(PlayerLoopTiming.EarlyUpdate, AverageVector)
             .Subscribe(orbit => targetCamState = targetCamState
                 .RotatedAround(math.radians(orbit.x))
                 .RotatedUp(math.radians(-orbit.y))
              )
             .AddTo(this);
 
-        rollAxis.ReadInputSticky<float>(PlayerLoopTiming.FixedUpdate, list => list.Average())
+        rollAxis.ReadInputSticky<float>(PlayerLoopTiming.EarlyUpdate, list => list.Average())
             .Subscribe(roll => targetCamState = targetCamState.Rolled(math.radians(roll)))
             .AddTo(this);
 
@@ -162,7 +162,7 @@ public class OrbitingCameraController : MonoBehaviour
         return res / input.Count;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         targetCamState = targetCamState.PointedAt(orbitTarget.bounds);
         if (currentCamState.Equals(targetCamState))

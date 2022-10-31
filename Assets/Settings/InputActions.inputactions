@@ -51,9 +51,27 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Slide alternate option 2",
+                    "name": "Slide alternate option 2 - reset rotation",
                     "type": "Button",
                     "id": "fa03b399-27f0-486c-a3f6-a0b1e0198484",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Slide alternate option 3 - pause updates",
+                    "type": "Button",
+                    "id": "6c1871ec-b396-4883-91dd-417e3cacf752",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Slide alternate option 4 - reboot",
+                    "type": "Button",
+                    "id": "7ca42e72-a77a-460e-8fb3-27f9d7b0e541",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -233,11 +251,11 @@
                 },
                 {
                     "name": "",
-                    "id": "05f6913d-c316-48b2-a6bb-e225f14c7960",
+                    "id": "cb79e4ff-fc4b-44a5-a358-b886edea0377",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";Keyboard&Mouse",
+                    "groups": "",
                     "action": "Next Slide",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -302,7 +320,7 @@
                     "id": "1f9efe27-36cf-4584-a9b2-52e9d649e38a",
                     "path": "<Gamepad>/leftStick/y",
                     "interactions": "",
-                    "processors": "Scale(factor=-0.25)",
+                    "processors": "Scale(factor=-0.05)",
                     "groups": "Gamepad",
                     "action": "ZoomIn",
                     "isComposite": false,
@@ -370,7 +388,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Slide alternate option 2",
+                    "action": "Slide alternate option 2 - reset rotation",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -381,7 +399,7 @@
                     "interactions": "SlowTap",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "Slide alternate option 2",
+                    "action": "Slide alternate option 2 - reset rotation",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -439,6 +457,50 @@
                     "action": "Slide alternate Axis 1",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "5a628618-b0e1-48ae-9cdc-29a058c29f70",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Slide alternate option 3 - pause updates",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "dbe8756d-e141-419d-9c36-ddd29e510d5b",
+                    "path": "<Mouse>/middleButton",
+                    "interactions": "MultiTap(tapCount=3)",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Slide alternate option 3 - pause updates",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "dd5e384b-bf8a-4d73-9c39-3fffe43bd2ac",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "MultiTap",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Slide alternate option 4 - reboot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bcb15416-b9ed-42b0-bad0-df9224e4cd22",
+                    "path": "<Mouse>/middleButton",
+                    "interactions": "MultiTap(tapCount=4)",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Slide alternate option 4 - reboot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },

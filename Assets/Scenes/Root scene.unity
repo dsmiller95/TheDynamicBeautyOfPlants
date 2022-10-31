@@ -509,7 +509,7 @@ MonoBehaviour:
   - {fileID: 4209380145033852860, guid: c2defd4a18fb9a44d9b69865a147a85c, type: 3}
   - {fileID: 4209380145033852860, guid: 2cb906264bc74d44ea447ca42be488cd, type: 3}
   - {fileID: 4209380145033852860, guid: f0a61622bacce954b9d3141f8e37c825, type: 3}
-  - {fileID: 4209380145033852860, guid: 4685dffaa3e6d924db2f91f58934d8ea, type: 3}
+  - {fileID: 4209380145033852860, guid: 60cfd55cb01e4aa4a96eba39bcf408ae, type: 3}
   renderCamera: {fileID: 1687258584}
   surfaceMaterial: {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   renderTextureTemplate: {fileID: 8400000, guid: af4d8bbb283f6204191a5747bfc64b60, type: 2}
@@ -1110,7 +1110,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 1.8754505e+28, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 0, y: -202891260, z: 4.5905e-41, w: 1e-45}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0

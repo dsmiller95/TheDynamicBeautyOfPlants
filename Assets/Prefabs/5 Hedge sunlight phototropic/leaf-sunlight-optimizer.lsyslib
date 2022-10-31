@@ -4,6 +4,10 @@
 #matches K
 #define LeafKinkDirection K
 #export LeafKinkDirection K
+#symbols k
+#matches k
+#define LeafRotateDirection k
+#export LeafRotateDirection k
 
 #symbols o
 #define LeafSunlightOptimizerSpawn o
@@ -21,11 +25,11 @@
 
 #define minimumSunlightToAdjust 0.05
 
-LeafSunlightOptimizerSpawn(maxBend) -> LeafSunlightOptimizerFlag(maxBend) LeafKinkDirection(0)
+LeafSunlightOptimizerSpawn(maxBend) -> LeafSunlightOptimizerFlag(maxBend) LeafRotateDirection(0) LeafKinkDirection(0)
 
 #define bendBlend 0.25
 
 #define percentDiffSumlight ((b - a)/(a + b))
-LeafSunlightOptimizerFlag(maxBend) < LeafKinkDirection(bend) > [LightAmount(a)][LightAmount(b)] : ((a + b) / 2) > minimumSunlightToAdjust -> LeafKinkDirection(bend * (1 - bendBlend) + percentDiffSumlight * maxBend * bendBlend)
+LeafSunlightOptimizerFlag(maxBend) < LeafKinkDirection(bend) > [LightAmount(a)][LightAmount(b)][LightAmount(c)] : ((a + b) / 2) > minimumSunlightToAdjust -> LeafKinkDirection(bend * (1 - bendBlend) + percentDiffSumlight * maxBend * bendBlend)
 
 

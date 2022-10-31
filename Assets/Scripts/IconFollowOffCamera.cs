@@ -14,7 +14,7 @@ namespace Assets.Scripts.ReactiveInputExtensions
         public int roundedness = 3;
 
 
-        private void Update()
+        private void LateUpdate()
         {
             var camRect = new Rect(Vector2.zero, Vector2.one);
             var canvasPlane = new Plane(renderingCanvas.worldCamera.transform.forward, renderingCanvas.transform.position);
