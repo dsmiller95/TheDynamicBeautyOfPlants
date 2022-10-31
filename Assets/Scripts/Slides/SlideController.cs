@@ -68,6 +68,11 @@ public class SlideController : MonoBehaviour
         slideIndex.AddTo(this);
     }
 
+    private void Start()
+    {
+        slideIndex.OnNext(0);
+    }
+
 
     public void AdvanceSlide(int slidesForward)
     {

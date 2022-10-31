@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "com.dman.l-system": "file:../../LindenmayerPlantSimulation/Packages/com.dman.l-system",
+    "com.dman.l-system": "0.9.3",
     "com.dman.utilities": "0.5.1",
     "com.unity.2d.sprite": "1.0.0",
     "com.unity.collab-proxy": "1.15.7",

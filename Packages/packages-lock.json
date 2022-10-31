@@ -17,9 +17,9 @@
       "url": "https://package.openupm.com"
     },
     "com.dman.l-system": {
-      "version": "file:../../LindenmayerPlantSimulation/Packages/com.dman.l-system",
+      "version": "0.9.3",
       "depth": 0,
-      "source": "local",
+      "source": "registry",
       "dependencies": {
         "com.unity.jobs": "0.8.0-preview.23",
         "com.unity.burst": "1.5.5",
@@ -31,7 +31,8 @@
         "com.dman.reactive-variables": "0.1.10",
         "com.dman.object-sets": "0.1.5",
         "com.cysharp.unitask": "2.3.1"
-      }
+      },
+      "url": "https://package.openupm.com"
     },
     "com.dman.object-sets": {
       "version": "0.1.5",
