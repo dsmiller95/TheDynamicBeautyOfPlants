@@ -13,9 +13,11 @@ Thumbs.db
 [Ll]ibrary
 [Tt]emp
 [Bb]uilds
+[Bb]uild
 [Ll]ogs
 [Uu]serSettings
 *.unityproj
+
 
 # Visual Studio #
 #################

@@ -5,8 +5,11 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/blue vevarian sample.unity
     guid: d1c3109bdb54ad54c8a2b2838528e640
+  - enabled: 1
+    path: Assets/Scenes/Root scene.unity
+    guid: b71e45662e34c8d4190900b4982922d1
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 55ee52489a7652f47a9569d0040ca597, type: 2}

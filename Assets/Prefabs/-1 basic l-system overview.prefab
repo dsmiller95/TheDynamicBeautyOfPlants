@@ -25,18 +25,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1221495536928210499}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8558614533602987414}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -257.50882, y: 96.67843}
-  m_SizeDelta: {x: 124.9824, y: 166.6431}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 0, y: -121.175674}
+  m_SizeDelta: {x: 121.1757, y: 164.5231}
+  m_Pivot: {x: 0, y: 1}
 --- !u!222 &794682217628522177
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -107,11 +107,11 @@ RectTransform:
   m_Father: {fileID: 8558614533602987414}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -246.08, y: -120.81}
-  m_SizeDelta: {x: 147.8304, y: 118.3821}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 148, y: 119}
+  m_Pivot: {x: 0, y: 0}
 --- !u!222 &1071285672260045224
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -332,11 +332,11 @@ RectTransform:
   m_Father: {fileID: 8558614533602987414}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 160, y: 49.1}
-  m_SizeDelta: {x: 316.491, y: 248.7147}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 320, y: 246.71484}
+  m_Pivot: {x: 1, y: 1}
 --- !u!222 &1196334437249481097
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -563,9 +563,25 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 870083045888581136}
+    - target: {fileID: 503332465078286269, guid: ee7a5b81251916c4dbaf7b0ee9e8a500, type: 3}
+      propertyPath: m_RenderMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4771726502464577153, guid: ee7a5b81251916c4dbaf7b0ee9e8a500, type: 3}
       propertyPath: m_Name
       value: slide ui canvas container
+      objectReference: {fileID: 0}
+    - target: {fileID: 5945681504855408872, guid: ee7a5b81251916c4dbaf7b0ee9e8a500, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5945681504855408872, guid: ee7a5b81251916c4dbaf7b0ee9e8a500, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 640
+      objectReference: {fileID: 0}
+    - target: {fileID: 5945681504855408872, guid: ee7a5b81251916c4dbaf7b0ee9e8a500, type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 360
       objectReference: {fileID: 0}
     - target: {fileID: 6659645700711499397, guid: ee7a5b81251916c4dbaf7b0ee9e8a500, type: 3}
       propertyPath: m_Pivot.x
