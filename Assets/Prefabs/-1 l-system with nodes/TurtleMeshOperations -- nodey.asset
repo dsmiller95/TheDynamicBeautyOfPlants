@@ -31,7 +31,7 @@ MonoBehaviour:
     MeshRef: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
     MeshVariants: []
     material: {fileID: 2100000, guid: 2144e1e620144c942bb1f38de8b41091, type: 2}
-    IndividualScale: {x: 1, y: 1, z: 1}
+    IndividualScale: {x: 0.9, y: 0.9, z: 0.9}
     UseMeshOrigin: 1
     ParameterScale: 0
     ScaleIsAdditional: 0
