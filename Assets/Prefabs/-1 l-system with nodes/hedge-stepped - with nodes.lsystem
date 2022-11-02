@@ -1,0 +1,35 @@
+#axiom P
+#iterations 10
+
+#symbols /\+-^&`@!*$
+
+#symbols L
+#define Leaf L
+#symbols F
+#define Stem F
+#symbols f
+#define FlatSegment f
+
+#symbols P
+#define GrowthTip P
+#symbols N
+#define NodeDefinition N
+#symbols I
+#define StemInit I
+
+#define BranchDownScale 0.95
+
+GrowthTip -> \(137) $(0.01) NodeDefinition FlatSegment StemInit StemInit !(BranchDownScale^2) @(BranchDownScale^2) [&(180-137) GrowthTip] [/(180) &(180-137) GrowthTip]
+
+
+#symbols W
+#define LeafyBranch W
+StemInit -> Stem LeafyBranch Stem
+
+P(0.5) | LeafyBranch -> [&& Leaf][/(180)&& Leaf]
+P(0.5) | LeafyBranch -> [/(90)&& Leaf][/(-90)&& Leaf]
+
+#symbols K
+#define BigFlower K
+#symbols k
+#define LittleFlower k
