@@ -330,13 +330,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8262086226830586897, guid: 4ba9526e36270df4cbde04f2e4b014c6, type: 3}
       propertyPath: m_text
-      value: '- Water Economics
-
-        - Fruiting
-
-        - Sunlight optimization
-
-'
+      value: "\u2022 Water Economics\n\u2022 Fruiting\n\u2022 Sunlight optimization\n\u2022
+        Genetic simulation\n"
       objectReference: {fileID: 0}
     - target: {fileID: 8262086226830586897, guid: 4ba9526e36270df4cbde04f2e4b014c6, type: 3}
       propertyPath: m_HorizontalAlignment

@@ -208,6 +208,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: big text slide UI
       objectReference: {fileID: 0}
+    - target: {fileID: 1861601588598717978, guid: e634f222c25c48040b9a9aa00f5bfebc, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1861601588598717978, guid: e634f222c25c48040b9a9aa00f5bfebc, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2866362936962293260, guid: e634f222c25c48040b9a9aa00f5bfebc, type: 3}
       propertyPath: m_text
       value: How?
@@ -296,6 +304,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6697195524152825906, guid: e634f222c25c48040b9a9aa00f5bfebc, type: 3}
+      propertyPath: m_text
+      value: "\u2022 Aristid Lindenmayer's system\n\u2022 Extending to interact with
+        environment"
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e634f222c25c48040b9a9aa00f5bfebc, type: 3}
 --- !u!1001 &6970225581836787718
@@ -309,6 +322,10 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 870083045888581136}
+    - target: {fileID: 503332465078286269, guid: ee7a5b81251916c4dbaf7b0ee9e8a500, type: 3}
+      propertyPath: m_RenderMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4771726502464577153, guid: ee7a5b81251916c4dbaf7b0ee9e8a500, type: 3}
       propertyPath: m_Name
       value: slide ui canvas container
