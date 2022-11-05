@@ -614,7 +614,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1984081797532885756, guid: b2770ef1aff1b0c4386bf69f4c04259b, type: 3}
       propertyPath: m_text
-      value: 'https://linktr.ee/fraculation
+      value: 'linktr.ee/fraculation
 
 '
       objectReference: {fileID: 0}
